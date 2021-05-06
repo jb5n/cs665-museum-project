@@ -5,6 +5,11 @@
 
 import keyboard
 
+# Things to have:
+# Calendar of events
+# Add/update/remove elements
+# Search for elements
+
 # These are commonly-used codes for terminal colors
 COLOR_BLUE = '\033[94m'
 COLOR_RESET = '\033[0m'
