@@ -22,12 +22,10 @@ while True:
             "Select an operation by pressing the highlighted key:",
             [
                 ("Search for an artifact, exhibit, or museum", dbSearch.search_db),
-       		   ("View the calendar of exhibits", dbModification.insert_disambiguation),
-       		   ("Add element to database", dbModification.insert_disambiguation),
-       		   ("Edit existing element in database",
-       		    dbModification.insert_disambiguation),
-       		   ("Delete element from the database",
-       		    dbModification.insert_disambiguation),
+       		   ("View the calendar of exhibits", dbModification.insert_database),
+       		   ("Add element to database", dbModification.insert_database),
+       		   ("Edit existing element in database", dbModification.update_database),
+       		   ("Delete element from the database", dbModification.insert_database),
        		   ("Quit", lambda: sys.exit(1))
             ])
 	print("***MUSEUM ARTIFACT MANAGEMENT SYSTEM***")

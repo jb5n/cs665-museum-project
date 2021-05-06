@@ -4,12 +4,15 @@
 import mariadb
 import sys
 
+db_connection = None
 db_cursor = None
 
 def connect_to_database(username, password, hostname):
 	# Connect to MariaDB Platform
+	global db_cursor
+	global db_connection
 	try:
-		conn = mariadb.connect(
+		db_connection = mariadb.connect(
 			user=username,
 			password=password,
 			host=hostname,
@@ -19,5 +22,4 @@ def connect_to_database(username, password, hostname):
 	except mariadb.Error as e:
 		print(f"Error connecting to database: {e}")
 		sys.exit(1)
-	global db_cursor
-	db_cursor = conn.cursor()
+	db_cursor = db_connection.cursor()

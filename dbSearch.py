@@ -6,15 +6,13 @@ import dbConnector
 import userInterface
 
 def search_db():
-	query = input("Input your search query:\n> ")
-
 	table = userInterface.request_input(
 		"Select the type of element you want to search for by pressing the highlighted key:",
 		[
 			# ("W - All categories", lambda: "all"),
 			("Artifact", lambda: "artifact"),
 			("Exhibit", lambda: "exhibit"),
-			("Museum", lambda: "museum"),
+			("Museum", lambda: "museumlocation"),
 			("Quit", lambda: None)
 		])
 	if table is None: # User selected the Quit option
@@ -24,7 +22,8 @@ def search_db():
             "Select the field you want to search for by pressing the highlighted key:", table)
 	if field is None:  # User selected the Quit option
 		return
-		
+	
+	query = input("Input your search query:\n> ")
 	print(f"\nSearching for {field} in {table}")
 	
 	search_results = None

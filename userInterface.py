@@ -3,7 +3,6 @@
 # Justin Bostian, Bailey Kippenberger
 # This file contains a general-purpose interface for user interaction
 
-import keyboard
 from console.utils import wait_key
 
 # Things to have:
@@ -22,6 +21,7 @@ museum_fields = ['ID', 'Name', 'Address']
 # For proper searching we need to differentiate between chars/non-chars and ints/non-ints
 non_char_fields = ['Age', 'Value', 'StartTime', 'EndTime']
 int_fields = ['Age', 'Value']
+date_fields = ['StartTime', 'EndTime']
 
 # Instructions is a simple string that is printed before the options, as an introduction to what input is requested
 # Options is a list of pairs. Each pair consists of a string prompt that will be rendered as an option for the user to
@@ -34,7 +34,7 @@ def request_input(instructions, options):
 	while True: # Loop until a key is pressed that matches our prompt
 		keypressed = wait_key()
 		for prompt, func in options:
-			if keypressed == prompt[0].lower():
+			if keypressed.lower() == prompt[0].lower():
 				return func()
 
 # Prompts the user to select a single field from the table, or choose all
@@ -55,8 +55,7 @@ def select_field(instructions, table):
 	for field in fields:
 		print(f"{COLOR_BLUE}" + field[0] + f"{COLOR_RESET}" + field[1:])
 	while True:  # Loop until a key is pressed that matches our prompt
-		wait_key()
-		keypressed = keyboard.read_key()
+		keypressed = wait_key()
 		for field in fields:
-			if keypressed == field[0].lower():
+			if keypressed.lower() == field[0].lower():
 				return field
