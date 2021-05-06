@@ -3,6 +3,12 @@
 # Justin Bostian, Bailey Kippenberger
 # This is the entry point for the program
 
+# This program needs the following third-party libraries, which can be downloaded with pip:
+#	getpass
+#	console
+#	mariadb
+# This program uses some ANSI codes for colored text in the console. It may not work on all devices.
+
 from getpass import getpass
 
 import dbConnector
