@@ -5,6 +5,7 @@
 import dbConnector
 import userInterface
 
+# Search for an artifact, exhibit, or museum in the database
 def search_db():
 	table = userInterface.request_input(
 		"Select the type of element you want to search for by pressing the highlighted key:",
@@ -24,8 +25,7 @@ def search_db():
 	
 	query = input("Input your search query:\n> ")
 	print(f"\nSearching for {field} in {table}")
-	
-	search_results = None
+
 	try:
 		if field in userInterface.int_fields:
 			dbConnector.db_cursor.execute(f"SELECT * FROM {table} WHERE {field}={query}")
@@ -40,4 +40,14 @@ def search_db():
 		return
 	print(f"Search Results:\n{dbConnector.db_cursor.fetchall()}\n")
 	
+	
+# View the available exhibits on a given day
+def search_calendar():
+	query = input("Input a date you would like to see the exhibits for:\n> ")
+	try:
+		dbConnector.db_cursor.execute(f"SELECT * FROM Exhibit WHERE StartTime <= '{query}' AND EndTime >= '{query}'")
+	except Exception as e:
+		print(f"Database search failed. Error: {e}\n")
+		return
+	print(f"The following exhibits will be available on {query}:\n{dbConnector.db_cursor.fetchall()}\n")
 	

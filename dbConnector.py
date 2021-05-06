@@ -1,6 +1,8 @@
 # CS 665 Group Project
 # Museum Artifact Management System
 # Justin Bostian, Bailey Kippenberger
+# This file contains the code necessary to connect to a mariaDB database
+
 import mariadb
 import sys
 

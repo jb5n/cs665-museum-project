@@ -6,6 +6,7 @@
 import dbConnector
 import userInterface
 
+# Add a new element to the database
 def insert_database():
 	table = userInterface.request_input(
 		"Select the type of element you want to add by pressing the highlighted key:",
@@ -40,6 +41,7 @@ def insert_database():
 		print(f"Failed to insert data. Error: {e}")
 
 
+# Update the field of an element from the database
 def update_database():
 	table = userInterface.request_input(
 		"Select the type of element you want to update by pressing the highlighted key:",
@@ -71,6 +73,7 @@ def update_database():
 	print("Update Successful")
 		
 
+# Delete an element from the database
 def delete_database():
 	table = userInterface.request_input(
 		"Select the type of element you want to delete by pressing the highlighted key:",

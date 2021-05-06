@@ -5,15 +5,12 @@
 
 from console.utils import wait_key
 
-# Things to have:
-# Calendar of events
-# Add/update/remove elements
-# Search for elements
-
 # These are commonly-used codes for terminal colors
-COLOR_BLUE = '\033[94m'
-COLOR_RESET = '\033[0m'
+COLOR_BLUE   = '\033[94m'
+COLOR_YELLOW = '\u001b[33m'
+COLOR_RESET	 = '\033[0m'
 
+# Enumerate the fields of our tables
 artifact_fields = ['ID', 'Name', 'Type', 'Description', 'Age', 'ChainOCust', 'PlaceOfOrigin', 'ExhibitID', 'Value']
 exhibit_fields = ['ID', 'Theme', 'MuseumLocID', 'LocInMuse', 'StartTime', 'EndTime']
 museum_fields = ['ID', 'Name', 'Address']
@@ -22,6 +19,10 @@ museum_fields = ['ID', 'Name', 'Address']
 non_char_fields = ['Age', 'Value', 'StartTime', 'EndTime']
 int_fields = ['Age', 'Value']
 date_fields = ['StartTime', 'EndTime']
+
+# Prints a nice title header for the program
+def print_header():
+	print(f"{COLOR_YELLOW}***MUSEUM ARTIFACT MANAGEMENT SYSTEM***{COLOR_RESET}")
 
 # Instructions is a simple string that is printed before the options, as an introduction to what input is requested
 # Options is a list of pairs. Each pair consists of a string prompt that will be rendered as an option for the user to
