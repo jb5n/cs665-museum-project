@@ -7,7 +7,7 @@ import dbConnector
 import dbModification
 import dbSearch
 from getpass import getpass
-import keyboard
+import sys
 import userInterface
 
 print("***MUSEUM ARTIFACT MANAGEMENT SYSTEM***")
@@ -17,10 +17,11 @@ password = getpass("Please input your password\n> ")
 
 dbConnector.connect_to_database(username, password, hostname)
 
-userInterface.request_input(
-    "Select an operation by pressing the highlighted key:",
-   	[
-            ("Search for an artifact, exhibit, or museum", dbSearch.search_db),
+while True:
+	userInterface.request_input(
+            "Select an operation by pressing the highlighted key:",
+            [
+                ("Search for an artifact, exhibit, or museum", dbSearch.search_db),
        		   ("View the calendar of exhibits", dbModification.insert_disambiguation),
        		   ("Add element to database", dbModification.insert_disambiguation),
        		   ("Edit existing element in database",
@@ -28,4 +29,5 @@ userInterface.request_input(
        		   ("Delete element from the database",
        		    dbModification.insert_disambiguation),
        		   ("Quit", lambda: sys.exit(1))
-	])
+            ])
+	print("***MUSEUM ARTIFACT MANAGEMENT SYSTEM***")

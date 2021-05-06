@@ -14,7 +14,7 @@ def connect_to_database(username, password, hostname):
 			password=password,
 			host=hostname,
 			port=3306,
-			database="museumInventory"
+			database="museuminventory"
 		)
 	except mariadb.Error as e:
 		print(f"Error connecting to database: {e}")

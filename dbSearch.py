@@ -5,11 +5,8 @@
 import dbConnector
 import userInterface
 
-
 def search_db():
 	query = input("Input your search query:\n> ")
-	# Surround the query in % so that we don't have to append them when passing the query to the database
-	query_substr = "\"%" + query + "%\""
 
 	table = userInterface.request_input(
 		"Select the type of element you want to search for by pressing the highlighted key:",
@@ -23,47 +20,26 @@ def search_db():
 	if table is None: # User selected the Quit option
 		return
 
-	field = "all"	
-	if table != "all":
-		# If we are not searching all tables, prompt what field they specifically want to search
-		field = userInterface.select_field(
-			"Select the field you want to search for by pressing the highlighted key:", table)
-		if field is None:  # User selected the Quit option
-			return
+	field = userInterface.select_field(
+            "Select the field you want to search for by pressing the highlighted key:", table)
+	if field is None:  # User selected the Quit option
+		return
+		
+	print(f"\nSearching for {field} in {table}")
 	
-	search_results = []
+	search_results = None
+	try:
+		if field in userInterface.int_fields:
+			dbConnector.db_cursor.execute(f"SELECT * FROM {table} WHERE {field}={query}")
+		elif field in userInterface.non_char_fields:
+			dbConnector.db_cursor.execute(
+				f"SELECT * FROM {table} WHERE {field}=\"{query}\"")
+		else:  # We can only use LIKE on char fields
+			dbConnector.db_cursor.execute(
+				f"SELECT * FROM {table} WHERE {field} LIKE \"%{query}%\"")
+	except Exception as e:
+		print(f"Search Failed. Error: {e}\n")
+		return
+	print(f"Search Results:\n{dbConnector.db_cursor.fetchall()}\n")
 	
-	if field == "all":
-		if table == "all" or table == "artifact":
-			search_results.append(dbConnector.db_cursor.execute(
-				f"""SELECT * FROM Artifact WHERE
-					ID='{query}' OR
-					Name LIKE {query_substr} OR
-					Type LIKE {query_substr} OR
-					Description LIKE {query_substr} OR
-					Age={query} OR
-					ChainOCust LIKE {query_substr} OR
-					PlaceOfOrigin LIKE {query_substr} PR
-					ExhibitID='{query}' OR
-					Value={query}"""
-			))
-		elif table == "all" or table == "exhibit":
-			search_results.append(dbConnector.db_cursor.execute(
-				f"""SELECT * FROM Exhibit WHERE
-					ID='{query}' OR
-					Theme LIKE {query_substr} OR
-					MuseumLocID='{query}' OR
-					LocInMuse LIKE {query_substr} OR
-					StartTime='{query}' OR
-					EndTime='{query}'"""
-			))
-		elif table == "all" or table == "museum":
-			search_results.append(dbConnector.db_cursor.execute(
-				f"""SELECT * FROM MuseumLocation WHERE
-					ID={query} OR
-					Name LIKE {query_substr} OR
-					Address LIKE {query_substr}"""
-			))
-	else:
-		...
 	
