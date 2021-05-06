@@ -25,7 +25,7 @@ while True:
        		   ("View the calendar of exhibits", dbModification.insert_database),
        		   ("Add element to database", dbModification.insert_database),
        		   ("Edit existing element in database", dbModification.update_database),
-       		   ("Delete element from the database", dbModification.insert_database),
+       		   ("Delete element from the database", dbModification.delete_database),
        		   ("Quit", lambda: sys.exit(1))
             ])
 	print("***MUSEUM ARTIFACT MANAGEMENT SYSTEM***")

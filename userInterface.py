@@ -37,7 +37,7 @@ def request_input(instructions, options):
 			if keypressed.lower() == prompt[0].lower():
 				return func()
 
-# Prompts the user to select a single field from the table, or choose all
+# Prompts the user to select a single field from the table
 # Table should be a string with one of the values: artifact, exhibit, or museum
 # Returns the name of the field they chose
 def select_field(instructions, table):

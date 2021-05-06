@@ -10,7 +10,6 @@ def insert_database():
 	table = userInterface.request_input(
 		"Select the type of element you want to add by pressing the highlighted key:",
 		[
-			# ("W - All categories", lambda: "all"),
 			("Artifact", lambda: "artifact"),
 			("Exhibit", lambda: "exhibit"),
 			("Museum", lambda: "museumlocation"),
@@ -45,7 +44,6 @@ def update_database():
 	table = userInterface.request_input(
 		"Select the type of element you want to update by pressing the highlighted key:",
 		[
-			# ("W - All categories", lambda: "all"),
 			("Artifact", lambda: "artifact"),
 			("Exhibit", lambda: "exhibit"),
 			("Museum", lambda: "museumlocation"),
@@ -69,4 +67,28 @@ def update_database():
 		dbConnector.db_connection.commit()
 	except Exception as e:
 		print(f"Failed to update data. Error: {e}")
+		return
+	print("Update Successful")
 		
+
+def delete_database():
+	table = userInterface.request_input(
+		"Select the type of element you want to delete by pressing the highlighted key:",
+		[
+			("Artifact", lambda: "artifact"),
+			("Exhibit", lambda: "exhibit"),
+			("Museum", lambda: "museumlocation"),
+			("Quit", lambda: None)
+		])
+	if table is None:  # User selected the Quit option
+		return
+
+	target_id = input(f"Enter the ID of the {table} you wish to delete:\n> ")
+
+	try:
+		dbConnector.db_cursor.execute(f"DELETE FROM {table} WHERE ID=\"{target_id}\"")
+		dbConnector.db_connection.commit()
+	except Exception as e:
+		print(f"Failed to delete field. Error: {e}")
+		return
+	print("Delete Successful")

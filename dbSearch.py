@@ -9,7 +9,6 @@ def search_db():
 	table = userInterface.request_input(
 		"Select the type of element you want to search for by pressing the highlighted key:",
 		[
-			# ("W - All categories", lambda: "all"),
 			("Artifact", lambda: "artifact"),
 			("Exhibit", lambda: "exhibit"),
 			("Museum", lambda: "museumlocation"),
