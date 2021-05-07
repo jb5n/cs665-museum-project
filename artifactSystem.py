@@ -14,6 +14,7 @@ from getpass import getpass
 import dbConnector
 import dbModification
 import dbSearch
+import sys
 import userInterface
 
 # Initial connection and setup
